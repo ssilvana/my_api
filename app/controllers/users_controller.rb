@@ -21,6 +21,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    if @user.update_attributes(user_params)
+      render json: @user, status: :ok
+    else
+      render_error(@user, :unprocessable_entity)
+    end
+  end
+
   private
   def user_params
     ActiveModelSerializers::Deserialization.jsonapi_parse(params)
