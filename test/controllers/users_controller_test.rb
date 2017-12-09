@@ -107,4 +107,13 @@ class UsersControllerTest < ActionController::TestCase
     jdata = JSON.parse response.body
     assert_equal 'User Number1a', jdata['data']['attributes']['full-name']
   end
+
+  test "Should delete user" do
+    user = users('user_1')
+    ucount = User.count - 1
+    @request.headers["X-Api-Key"] = user.token
+    delete :destroy, params: { id: users('user_5').id }
+    assert_response 204
+    assert_equal ucount, User.count
+  end
 end

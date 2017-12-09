@@ -29,6 +29,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user.destroy
+    head 204
+  end
+
   private
   def user_params
     ActiveModelSerializers::Deserialization.jsonapi_parse(params)
