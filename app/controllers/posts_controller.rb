@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.page(params[:page] ? params[:page][:number] : 1)
-    render json: posts, meta: pagination_meta(posts)
+    render json: posts, meta: pagination_meta(posts), include: ['user']
   end
 
   private
