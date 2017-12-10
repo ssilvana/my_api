@@ -7,7 +7,7 @@ class MySessionsController < ApplicationController
     head 406 and return unless user
     if user.authenticate(data[:password])
       user.regenerate_token
-      render json: user, status: :created,
+      render json: user, status: :created, meta: default_meta,
              serializer: ActiveModel::Serializer::MySessionSerializer and return
     end
     head 403
